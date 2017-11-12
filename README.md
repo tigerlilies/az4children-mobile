@@ -1,3 +1,3 @@
-# Mobile app gfor Mentor Matching Application
+# Mobile app for Mentor Matching Application
 
 TBD
