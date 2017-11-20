@@ -1,57 +1,66 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
+ * Arizonan for Children
+ * Tiger Lilies for Nonprofits
  */
 
 import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { StackNavigator } from 'react-navigation';
+// import { Provider } from 'react-redux';
+// import Store from './store';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
+import Home from './components/Home';
+import ChildList from './components/ChildList';
+import Child from './components/Child';
+import SearchGender from './components/SearchGender';
+import SearchAge from './components/SearchAge';
+import SearchLength from './components/SearchLength';
+
+const RootNavigator = StackNavigator({
+  Home: {
+    screen: Home,
+    navigationOptions: ({navigation}) => ({
+      title: 'Home',
+    })
+  },
+  ChildList: {
+    screen: ChildList,
+    navigationOptions: ({navigation}) => ({
+      title: 'Children',
+    })
+  },
+  Child: {
+    screen: Child,
+    navigationOptions: ({navigation}) => ({
+      title: 'Child Info',
+    })
+  },
+  SearchGender: {
+    screen: SearchGender,
+    navigationOptions: ({navigation}) => ({
+      title: 'Search',
+    })
+  },
+  SearchAge: {
+    screen: SearchAge,
+    navigationOptions: ({navigation}) => ({
+      title: 'Search',
+    })
+  },
+  SearchLength: {
+    screen: SearchLength,
+    navigationOptions: ({navigation}) => ({
+      title: 'Search',
+    })
+  }
 });
 
-export default class App extends Component<{}> {
+class App extends Component {
+  // const StoreInstance = Store();
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
+      <RootNavigator />
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+export default App;
