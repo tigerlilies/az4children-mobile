@@ -1,6 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { StyleSheet, ScrollView, Text, Image, Picker } from 'react-native';
 import { Card, Button } from 'react-native-elements';
+import * as selectAction from '../actions/selected';
+
+const searchBtn = (props) => {
+  const { navigate } = props.navigation;
+  props.selectAction.setGender('M');
+  console.log('in searchBtn >>> props after', props);
+  navigate('SearchAge');
+}
 
 const SearchGender = (props) => {
   const { navigate } = props.navigation;
@@ -14,7 +24,8 @@ const SearchGender = (props) => {
         <Text style={styles.label}>
           Select a Boy or Girl
         </Text>
-        <Picker>
+        <Picker
+          selectedValue="0">
           <Picker.Item label="Any" value="0" />
           <Picker.Item label="Boy" value="m" />
           <Picker.Item label="Girl" value="f" />
@@ -22,14 +33,20 @@ const SearchGender = (props) => {
         <Button
           backgroundColor='#523F78'
           buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 20}}
-          onPress={() => navigate('SearchAge')}
+          onPress={() => searchBtn(props)}
           title='NEXT' />
       </Card>
     </ScrollView>
   );
 }
 
-export default SearchGender;
+const mapDispatchToProps = dispatch => {
+  return {
+    selectAction: bindActionCreators(selectAction, dispatch)
+  }
+}
+
+export default connect(null, mapDispatchToProps)(SearchGender);
 
 const styles = StyleSheet.create({
   cardContainer: {

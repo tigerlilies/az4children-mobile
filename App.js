@@ -4,16 +4,19 @@
  */
 
 import React, { Component } from 'react';
+import { connect, Provider } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { StackNavigator } from 'react-navigation';
-// import { Provider } from 'react-redux';
-// import Store from './store';
 
+import Store from './store';
 import Home from './components/Home';
 import ChildList from './components/ChildList';
 import Child from './components/Child';
 import SearchGender from './components/SearchGender';
 import SearchAge from './components/SearchAge';
 import SearchLength from './components/SearchLength';
+
+import * as profileAction from './actions/profile';
 
 const RootNavigator = StackNavigator({
   Home: {
@@ -55,12 +58,22 @@ const RootNavigator = StackNavigator({
 });
 
 class App extends Component {
-  // const StoreInstance = Store();
+  componentDidMount() {
+    this.props.profileAction.fetchProfiles();
+  }
+
   render() {
     return (
       <RootNavigator />
     );
   }
+
 }
 
-export default App;
+function mapDispatchToProps(dispatch) {
+  return {
+    profileAction: bindActionCreators(profileAction, dispatch)
+  }
+}
+
+export default connect(null, mapDispatchToProps)(App);

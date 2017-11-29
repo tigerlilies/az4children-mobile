@@ -15,11 +15,13 @@ const Home = (props) => {
           icon={{name: 'male-symbol', type: 'foundation'}}
           backgroundColor='#03A9F4'
           buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 10}}
+          onPress={() => navigate('ChildList', { gender: 'M' })}
           title='BOY' />
         <Button
           icon={{name: 'female-symbol', type: 'foundation' }}
           backgroundColor='#E91AD5'
           buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 50}}
+          onPress={() => navigate('ChildList', { gender: 'F' })}
           title='GIRL' />
         <Button
           icon={{name: 'search'}}

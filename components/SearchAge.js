@@ -1,6 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as selectAction from '../actions/selected';
 import { StyleSheet, ScrollView, Text, Image, Picker } from 'react-native';
 import { Card, Button } from 'react-native-elements';
+
+const searchBtn = (props) => {
+  const { navigate } = props.navigation;
+  props.selectAction.setAge('1');
+  console.log('in searchBtn >>> props after', props);
+  navigate('SearchLength');
+}
 
 const SearchAge = (props) => {
   const { navigate } = props.navigation;
@@ -24,14 +34,20 @@ const SearchAge = (props) => {
         <Button
           backgroundColor='#523F78'
           buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 20}}
-          onPress={() => navigate('SearchLength')}
+          onPress={() => searchBtn(props)}
           title='NEXT' />
       </Card>
     </ScrollView>
   );
 }
 
-export default SearchAge;
+const mapDispatchToProps = dispatch => {
+  return {
+    selectAction: bindActionCreators(selectAction, dispatch)
+  }
+}
+
+export default connect(null, mapDispatchToProps)(SearchAge);
 
 const styles = StyleSheet.create({
   cardContainer: {
