@@ -6,7 +6,7 @@ const Home = (props) => {
   const { navigate } = props.navigation;
   return (
     <ScrollView>
-      <Card containerStyle={styles.cardContainer}>
+      <Card containerStyle={{ borderRadius: 5 }}>
         <Image
           source={require('../images/logo.png')}
           style={styles.logo}
@@ -25,7 +25,7 @@ const Home = (props) => {
           title='GIRL' />
         <Button
           icon={{name: 'search'}}
-          backgroundColor='#07C02E'
+          backgroundColor='#523F78'
           buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 100}}
           onPress={() => navigate('SearchGender')}
           title='ADVANCED SEARCH' />
@@ -37,9 +37,6 @@ const Home = (props) => {
 export default Home;
 
 const styles = StyleSheet.create({
-  cardContainer: {
-    borderRadius: 10
-  },
   logo: {
     marginTop: 80,
     marginLeft: 50,
