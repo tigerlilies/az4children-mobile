@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+// import { connect } from 'react-redux';
+// import { bindActionCreators } from 'redux';
 import { StyleSheet, ScrollView, Text, Image, Picker } from 'react-native';
 import { Card, Button } from 'react-native-elements';
-import * as selectAction from '../actions/selected';
+// import * as selectAction from '../actions/selected';
 
 class SearchGender extends Component {
   constructor() {
@@ -13,11 +13,11 @@ class SearchGender extends Component {
     }
   }
 
-  searchBtn() {
-    const { navigate } = this.props.navigation;
-    this.props.selectAction.setGender(this.state.gender);
-    navigate('SearchAge');
-  }
+  // searchBtn() {
+  //   const { navigate } = this.props.navigation;
+  //   this.props.selectAction.setGender(this.state.gender);
+  //   navigate('SearchAge');
+  // }
 
   render() {
     const { navigate } = this.props.navigation;
@@ -41,7 +41,7 @@ class SearchGender extends Component {
           <Button
             backgroundColor='#523F78'
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 20}}
-            onPress={() => this.searchBtn()}
+            onPress={() => navigate('SearchAge', { gender: this.state.gender })}
             title='NEXT' />
         </Card>
       </ScrollView>
@@ -49,19 +49,20 @@ class SearchGender extends Component {
   }
 }
 
-function mapStateToProps(state, props) {
-  return {
-    selected: state.selected
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    selectAction: bindActionCreators(selectAction, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchGender);
+// function mapStateToProps(state, props) {
+//   return {
+//     selected: state.selected
+//   }
+// }
+//
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     selectAction: bindActionCreators(selectAction, dispatch)
+//   }
+// }
+//
+// export default connect(mapStateToProps, mapDispatchToProps)(SearchGender);
+export default SearchGender;
 
 const styles = StyleSheet.create({
   cardContainer: {

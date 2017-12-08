@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+// import { connect } from 'react-redux';
+// import { bindActionCreators } from 'redux';
 import { StyleSheet, ScrollView, Text, Image, Picker } from 'react-native';
 import { Card, Button } from 'react-native-elements';
-import * as selectAction from '../actions/selected';
+// import * as selectAction from '../actions/selected';
 
 class SearchLength extends Component {
   constructor() {
@@ -13,14 +13,16 @@ class SearchLength extends Component {
     }
   }
 
-  searchBtn() {
-    const { navigate } = this.props.navigation;
-    this.props.selectAction.setLength(this.state.length);
-    navigate('ChildList');
-  }
+  // searchBtn() {
+  //   const { navigate } = this.props.navigation;
+  //   this.props.selectAction.setLength(this.state.length);
+  //   navigate('ChildList', this.props.selected);
+  // }
 
   render() {
     const { navigate } = this.props.navigation;
+    let { gender } = this.props.navigation.state.params;
+    let { age } = this.props.navigation.state.params;
     return (
       <ScrollView>
         <Card containerStyle={styles.cardContainer}>
@@ -44,7 +46,11 @@ class SearchLength extends Component {
           <Button
             backgroundColor='#523F78'
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 20}}
-            onPress={() => this.searchBtn()}
+            onPress={() => navigate('ChildList', {
+              gender,
+              age,
+              length: this.state.length
+            })}
             title='NEXT' />
         </Card>
       </ScrollView>
@@ -52,19 +58,21 @@ class SearchLength extends Component {
   }
 }
 
-function mapStateToProps(state, props) {
-  return {
-    selected: state.selected
-  }
-}
+// function mapStateToProps(state, props) {
+//   return {
+//     selected: state.selected
+//   }
+// }
+//
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     selectAction: bindActionCreators(selectAction, dispatch)
+//   }
+// }
+//
+// export default connect(mapStateToProps, mapDispatchToProps)(SearchLength);
 
-function mapDispatchToProps(dispatch) {
-  return {
-    selectAction: bindActionCreators(selectAction, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchLength);
+export default SearchLength;
 
 const styles = StyleSheet.create({
   cardContainer: {
