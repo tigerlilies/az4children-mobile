@@ -9,3 +9,10 @@ export const fetchProfiles = () => {
     payload: axios.get(`${API_URL}/api/profiles`)
   });
 };
+
+export const fetchUnassigned = () => {
+  return ({
+    type: 'UNASSIGNED',
+    payload: axios.get(`${API_URL}/api/profiles/unassigned`)
+  });
+};

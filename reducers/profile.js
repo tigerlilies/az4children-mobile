@@ -11,6 +11,13 @@ export default (state=initialState, action) => {
     case 'PROFILE_REJECTED':
       return action.payload;
 
+    case 'UNASSIGNED_PENDING':
+      return state;
+    case 'UNASSIGNED_FULFILLED':
+      return [...action.payload.data];
+    case 'UNASSIGNED_REJECTED':
+      return action.payload;
+
     default:
       return state;
 

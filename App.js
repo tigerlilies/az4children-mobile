@@ -15,6 +15,7 @@ import Child from './components/Child';
 import SearchGender from './components/SearchGender';
 import SearchAge from './components/SearchAge';
 import SearchLength from './components/SearchLength';
+import Confirm from './components/Confirm';
 
 import * as profileAction from './actions/profile';
 
@@ -54,12 +55,17 @@ const RootNavigator = StackNavigator({
     navigationOptions: ({navigation}) => ({
       title: 'Search',
     })
+  },
+  Confirm: {
+    screen: Confirm,
+    navigationOptions: ({navigation}) => ({title: 'Confirm'})
   }
 });
 
 class App extends Component {
   componentDidMount() {
-    this.props.profileAction.fetchProfiles();
+    // this.props.profileAction.fetchProfiles();
+    this.props.profileAction.fetchUnassigned();
   }
 
   render() {

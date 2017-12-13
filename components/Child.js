@@ -1,15 +1,12 @@
 import React from 'react';
-import { StyleSheet, ScrollView, View, Text } from 'react-native';
-import { Button, Card, ListItem } from 'react-native-elements';
+import { StyleSheet, ScrollView, View, Text, Alert } from 'react-native';
+import { Button, Card, ListItem, Avatar } from 'react-native-elements';
 import config from '../config';
 
-const IMG_URL = config.IMG_URL;
-
-const sendMail = () => {
-  console.log('send mail');
-}
+const { IMG_URL } = config;
 
 const Child = (props) => {
+  let { navigate } = props.navigation;
   let {
     id,
     age,
@@ -32,13 +29,16 @@ const Child = (props) => {
   }
   return (
     <ScrollView>
-      <Card
-        title={`${intro} - Age: ${age}`}
-        image={{uri:avatar_url}}
-        imageStyle={styles.avatar}
-        containerStyle={{ borderRadius: 5 }}>
-      </Card>
+      <View style={styles.headerContainer}>
+        <Avatar
+          large
+          rounded
+          source={{uri:avatar_url}}
+          activeOpacity={0.7}
+        />
+      </View>
       <View style={[styles.container, styles.highlight]}>
+        <Text>{`${intro} - Age: ${age}`}</Text>
         <Text>{summary}</Text>
       </View>
       <View style={styles.container}>
@@ -54,11 +54,10 @@ const Child = (props) => {
         <Text>{need3}</Text>
       </View>
       <Button
-        icon={{name: 'email'}}
         backgroundColor='#523F78'
         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginTop: 20, marginBottom: 100}}
-        title='SUBMIT'
-        onPress={() => sendMail()}
+        title='SELECT'
+        onPress={() => navigate('Confirm', props.navigation.state.params)}
       />
     </ScrollView>
   )
@@ -89,4 +88,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#36343A'
   },
+  headerContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#523F78',
+  },
+  heading: {
+    color: 'white',
+    marginTop: 10,
+    fontSize: 22,
+  }
 });

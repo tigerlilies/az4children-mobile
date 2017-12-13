@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
 import { StyleSheet, ScrollView, Text, Image, Picker } from 'react-native';
 import { Card, Button } from 'react-native-elements';
-// import * as selectAction from '../actions/selected';
 
 class SearchGender extends Component {
   constructor() {
@@ -12,12 +9,6 @@ class SearchGender extends Component {
       gender: '0'
     }
   }
-
-  // searchBtn() {
-  //   const { navigate } = this.props.navigation;
-  //   this.props.selectAction.setGender(this.state.gender);
-  //   navigate('SearchAge');
-  // }
 
   render() {
     const { navigate } = this.props.navigation;
@@ -49,19 +40,6 @@ class SearchGender extends Component {
   }
 }
 
-// function mapStateToProps(state, props) {
-//   return {
-//     selected: state.selected
-//   }
-// }
-//
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     selectAction: bindActionCreators(selectAction, dispatch)
-//   }
-// }
-//
-// export default connect(mapStateToProps, mapDispatchToProps)(SearchGender);
 export default SearchGender;
 
 const styles = StyleSheet.create({

@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, ScrollView, View, Text } from 'react-native';
-import { ListItem, Icon } from 'react-native-elements';
+import { Card, ListItem, Image } from 'react-native-elements';
 import config from '../config';
 
-// const IMG_URL = config.IMG_URL;
+const IMG_URL = config.IMG_URL;
 
 const getTodayDate = () => {
   let today = new Date();
@@ -25,18 +25,24 @@ const getTodayDate = () => {
 
 const ChildList = (props) => {
 
+  console.log('in ChildList >>> props', props);
   const { navigate } = props.navigation;
   let { age, gender, length } = props.navigation.state.params;
-  let headingText = '';
+  console.log('in ChildList >>> age:', age);
+  console.log('in ChildList >>> gender:', gender);
+  console.log('in ChildList >>> length:', length);
+  let avatar_url = '';
+
   if (gender === 'M') {
-    headingText = 'Boy';
+    avatar_url = `${IMG_URL}/images/boy.png`;
   } else if (gender === 'F') {
-    headingText = 'Girl';
+    avatar_url = `${IMG_URL}/images/girl.png`;
   } else {
-    headingText = 'Child Profiles';
+    avatar_url = `${IMG_URL}/images/girl.png`;
   }
 
   let children = props.profiles;
+  console.log('in ChildList >>> children:init', children);
   if (gender !== '0') {
     children = props.profiles.filter(profile => profile.gender === gender);
   }
@@ -49,6 +55,7 @@ const ChildList = (props) => {
     3: 12 - 15 years
     4: 15 - 18 years
   ******************/
+  console.log('in ChildList >>> children:bygender', children);
   if (age !== undefined) {
     children = children.filter(child => {
       switch (age) {
@@ -74,6 +81,7 @@ const ChildList = (props) => {
     3: Between 60 - 120 days
     4: Greater than 120 days
   ******************/
+  console.log('in ChildList >>> children:byage', children);
   if (length != undefined) {
     let today = getTodayDate();
     let date2 = new Date(today);
@@ -98,10 +106,10 @@ const ChildList = (props) => {
 
   return (
     <ScrollView>
-      <View style={styles.headerContainer}>
-        <Icon color="white" name="face" size={62} />
-        <Text style={styles.heading}>{headingText}</Text>
-      </View>
+      <Card
+        image={{uri:avatar_url}}
+        imageStyle={styles.avatar}
+        containerStyle={{ borderRadius: 5 }}>
       {children.map((child, i) => {
         return (
           <ListItem
@@ -113,6 +121,7 @@ const ChildList = (props) => {
           />
         );
       })}
+    </Card>
     </ScrollView>
   )
 
@@ -127,15 +136,8 @@ function mapStateToProps(state, props) {
 export default connect(mapStateToProps, null)(ChildList);
 
 const styles = StyleSheet.create({
-  headerContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#523F78',
-  },
-  heading: {
-    color: 'white',
-    marginTop: 10,
-    fontSize: 22,
+  avatar: {
+    width: 115,
+    marginLeft: 20
   }
 });

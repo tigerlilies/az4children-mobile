@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
 import { StyleSheet, ScrollView, Text, Image, Picker } from 'react-native';
 import { Card, Button } from 'react-native-elements';
-// import * as selectAction from '../actions/selected';
 
 class SearchLength extends Component {
   constructor() {
@@ -12,12 +9,6 @@ class SearchLength extends Component {
       length: '4'
     }
   }
-
-  // searchBtn() {
-  //   const { navigate } = this.props.navigation;
-  //   this.props.selectAction.setLength(this.state.length);
-  //   navigate('ChildList', this.props.selected);
-  // }
 
   render() {
     const { navigate } = this.props.navigation;
@@ -57,20 +48,6 @@ class SearchLength extends Component {
     );
   }
 }
-
-// function mapStateToProps(state, props) {
-//   return {
-//     selected: state.selected
-//   }
-// }
-//
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     selectAction: bindActionCreators(selectAction, dispatch)
-//   }
-// }
-//
-// export default connect(mapStateToProps, mapDispatchToProps)(SearchLength);
 
 export default SearchLength;
 
