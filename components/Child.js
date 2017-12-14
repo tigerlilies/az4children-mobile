@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, ScrollView, View, Text, Alert } from 'react-native';
 import { Button, Card, ListItem, Avatar } from 'react-native-elements';
-import config from '../config';
+import config from '../config/config';
 
 const { IMG_URL } = config;
 

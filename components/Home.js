@@ -26,7 +26,7 @@ const Home = (props) => {
         <Button
           icon={{name: 'search'}}
           backgroundColor='#523F78'
-          buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 100}}
+          buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 80}}
           onPress={() => navigate('SearchGender')}
           title='ADVANCED SEARCH' />
       </Card>
@@ -38,7 +38,7 @@ export default Home;
 
 const styles = StyleSheet.create({
   logo: {
-    marginTop: 80,
+    marginTop: 70,
     marginLeft: 50,
     marginBottom: 50,
     width: 200

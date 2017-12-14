@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as utilAction from '../actions/utils';
-import config from '../config';
+import config from '../config/config';
 import { Button, FormLabel, FormInput } from 'react-native-elements';
 
 const { EMAIL_SENDTO,

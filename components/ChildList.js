@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, ScrollView, View, Text } from 'react-native';
+import { StyleSheet, ScrollView, View, Text, Image } from 'react-native';
 import { ListItem, Icon } from 'react-native-elements';
-import config from '../config';
-
-// const IMG_URL = config.IMG_URL;
+// import { Tabs } from '../config/router';
 
 const getTodayDate = () => {
   let today = new Date();
@@ -24,6 +22,15 @@ const getTodayDate = () => {
 }
 
 const ChildList = (props) => {
+  const navigationOptions = {
+    tabBarLabel: 'Notifications',
+    tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}}
+        style={[styles.icon, {tintColor: tintColor}]}
+      />
+    ),
+  };
 
   const { navigate } = props.navigation;
   let { age, gender, length } = props.navigation.state.params;
