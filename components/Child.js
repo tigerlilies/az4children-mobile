@@ -37,7 +37,7 @@ const Child = (props) => {
           activeOpacity={0.7}
         />
       </View>
-      <View style={[styles.container, styles.highlight]}>
+      <View style={[styles.headerContainer, styles.highlight]}>
         <Text style={{color: '#fff', fontWeight: 'bold'}}>{`${intro} - Age: ${age}`}</Text>
         <Text style={{color: '#fff'}}>{summary}</Text>
       </View>
