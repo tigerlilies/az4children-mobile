@@ -38,8 +38,8 @@ const Child = (props) => {
         />
       </View>
       <View style={[styles.container, styles.highlight]}>
-        <Text>{`${intro} - Age: ${age}`}</Text>
-        <Text>{summary}</Text>
+        <Text style={{color: '#fff', fontWeight: 'bold'}}>{`${intro} - Age: ${age}`}</Text>
+        <Text style={{color: '#fff'}}>{summary}</Text>
       </View>
       <View style={styles.container}>
         <Text style={styles.title}>Characteristics:</Text>
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   },
   highlight: {
-    backgroundColor: '#E7A522'
+    backgroundColor: '#FF8333'
   },
   avatar: {
     width: 115,
