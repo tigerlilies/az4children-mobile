@@ -11,19 +11,18 @@ const { EMAIL_SENDTO,
   EMAIL_INTRO1,
   EMAIL_INTRO2 } = config;
 
-let mentorEmail = '';
-
 class Confirm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      errorMessage: ''
+      errorMessage: '',
+      mentorEmail: ''
     };
   }
 
   processSubmit(props) {
-    console.log('in processSubmit >>> mentorEmail:', mentorEmail);
-    if (mentorEmail === '') {
+    console.log('in processSubmit >>> mentorEmail:', this.state.mentorEmail);
+    if (this.state.mentorEmail === '' || this.state.mentorEmail === undefined) {
       this.setState({errorMessage: 'Email address is required!'});
     } else {
       const { navigate } = props.navigation;
@@ -34,7 +33,7 @@ class Confirm extends Component {
       	to: EMAIL_SENDTO,
         subject: EMAIL_SUBJECT,
         text: EMAIL_INTRO1,
-        html: `<p>${EMAIL_INTRO1}: ${mentorEmail}</p>
+        html: `<p>${EMAIL_INTRO1}: ${this.state.mentorEmail}</p>
           <p>${EMAIL_INTRO2}:</p>
           <p>ID: ${id}</p>
           <p>First Name: ${firstname}</p>
@@ -45,7 +44,7 @@ class Confirm extends Component {
   }
 
   render() {
-    console.log('in Confirm >>> props', this.props);
+    // console.log('in Confirm >>> props', this.props);
     let {
       id,
       age,
@@ -64,7 +63,11 @@ class Confirm extends Component {
         <FormLabel>Email address:</FormLabel>
         <FormInput
           placeholder="Please enter your email address"
-          onChangeText={val => mentorEmail = val}
+          onChangeText={val => {
+            console.log('val', val);
+            this.setState({mentorEmail: val});
+            console.log('mentorEmail', this.state.mentorEmail);
+          }}
           autoCapitalize="none"
         />
         <FormValidationMessage>{this.state.errorMessage}</FormValidationMessage>
