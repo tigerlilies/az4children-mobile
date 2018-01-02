@@ -48,13 +48,13 @@ const Confirm = (props) => {
   let g = gender === 'M' ? 'Boy' : 'Girl';
   return (
     <View style={styles.container}>
-      <Text>Thank you for selecting a {age} years old {g} to mentor. Please provide your email address below.</Text>
       <FormLabel>Email address:</FormLabel>
       <FormInput
         placeholder="Please enter your email address"
         onChangeText={val => mentorEmail = val}
         autoCapitalize="none"
       />
+      <Text style={{paddingTop: 40}}>Thank you for selecting a {age} years old {g} to mentor.</Text>
       <Text style={styles.summaryStyle}>Summary:</Text>
       <Text>{summary}</Text>
       <Text style={styles.spacer}>
