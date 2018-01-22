@@ -71,7 +71,7 @@ class Confirm extends Component {
           autoCapitalize="none"
         />
         <FormValidationMessage>{this.state.errorMessage}</FormValidationMessage>
-        <Text style={{paddingTop: 20}}>Thank you for selecting a {age} years old {g} to mentor.</Text>
+        <Text style={{paddingTop: 20}}>Thank you for your interest to mentor a {age} years old {g} to mentor.</Text>
         <Text style={styles.summaryStyle}>Summary:</Text>
         <Text>{summary}</Text>
         <Text style={styles.spacer}>
