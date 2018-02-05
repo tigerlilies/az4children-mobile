@@ -21,23 +21,20 @@ class Confirm extends Component {
   }
 
   processSubmit(props) {
-    console.log('in processSubmit >>> mentorEmail:', this.state.mentorEmail);
+    // console.log('in processSubmit >>> mentorEmail:', props);
+    // console.log('in processSubmit >>> mentorEmail:', this.state.mentorEmail);
     if (this.state.mentorEmail === '' || this.state.mentorEmail === undefined) {
       this.setState({errorMessage: 'Email address is required!'});
     } else {
       const { navigate } = props.navigation;
-      let { id,
-        firstname,
-        lastname } = props.navigation.state.params;
+      let { id } = props.navigation.state.params;
       utilAction.sendEmail({
       	to: EMAIL_SENDTO,
         subject: EMAIL_SUBJECT,
         text: EMAIL_INTRO1,
         html: `<p>${EMAIL_INTRO1}: ${this.state.mentorEmail}</p>
           <p>${EMAIL_INTRO2}:</p>
-          <p>ID: ${id}</p>
-          <p>First Name: ${firstname}</p>
-          <p>Last Name: ${lastname}</p>`
+          <p>ID: ${id}</p>`
       });
       navigate('Home');
     }
