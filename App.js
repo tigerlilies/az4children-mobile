@@ -16,6 +16,10 @@ class App extends Component {
     this.props.profileAction.fetchUnassigned();
   }
 
+  componentWillUnmount() {
+    this.props.profileAction.reset();
+  }
+
   render() {
     return <Root />;
   }

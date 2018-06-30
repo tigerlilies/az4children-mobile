@@ -1,5 +1,5 @@
 import React from 'react';
-import { TabNavigator, StackNavigator } from 'react-navigation';
+import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
 import Home from '../components/Home';
@@ -12,7 +12,7 @@ import Confirm from '../components/Confirm';
 import Activity from '../components/Activity';
 import About from '../components/About';
 
-export const HomeStack = StackNavigator({
+export const HomeStack = createStackNavigator({
   Home: {
     screen: Home
   },
@@ -52,7 +52,7 @@ export const HomeStack = StackNavigator({
   }
 });
 
-export const Tabs = TabNavigator({
+export const Tabs = createBottomTabNavigator({
   Home: {
     screen: HomeStack,
     navigationOptions: {
@@ -76,7 +76,7 @@ export const Tabs = TabNavigator({
   }
 });
 
-export const Root = StackNavigator({
+export const Root = createStackNavigator({
   Tabs: {
     screen: Tabs,
   }

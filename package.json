@@ -1,5 +1,5 @@
 {
-	"name": "mobile",
+	"name": "mentorme",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
@@ -7,17 +7,18 @@
 		"test": "jest"
 	},
 	"dependencies": {
-		"axios": "^0.17.1",
-		"react": "16.0.0",
-		"react-native": "0.50.3",
-		"react-native-elements": "^0.18.2",
-		"react-native-vector-icons": "^4.4.2",
-		"react-navigation": "^1.0.0-beta.19",
-		"react-redux": "^5.0.6",
-		"redux": "^3.7.2",
-		"redux-form": "^7.1.2",
+		"axios": "^0.18.0",
+		"react": "16.3.1",
+		"react-native": "0.55.4",
+		"react-native-elements": "^0.19.1",
+		"react-native-rename": "^2.2.2",
+		"react-native-vector-icons": "^4.6.0",
+		"react-navigation": "^2.5.5",
+		"react-redux": "^5.0.7",
+		"redux": "^4.0.0",
+		"redux-form": "^7.4.2",
 		"redux-logger": "^3.0.6",
-		"redux-promise-middleware": "^4.4.2"
+		"redux-promise-middleware": "^5.1.1"
 	},
 	"devDependencies": {
 		"babel-jest": "21.2.0",

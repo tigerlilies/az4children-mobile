@@ -3,7 +3,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 platform :ios, '8.0'
 
-target 'mobile' do
+target 'mentorme' do
   # Fixes required for pod specs to work with rn 0.42
   react_native_path = "../node_modules/react-native"
   pod "yoga", :path => "#{react_native_path}/ReactCommon/yoga"

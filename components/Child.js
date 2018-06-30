@@ -1,9 +1,6 @@
 import React from 'react';
 import { StyleSheet, ScrollView, View, Text, Alert } from 'react-native';
 import { Button, Card, ListItem, Avatar } from 'react-native-elements';
-import config from '../config/config';
-
-const { IMG_URL } = config;
 
 const Child = (props) => {
   let { navigate } = props.navigation;
@@ -19,23 +16,36 @@ const Child = (props) => {
     characteristic2,
     characteristic3 } = props.navigation.state.params;
   let intro = '';
-  let avatar_url = '';
-  if (gender === 'M') {
-    intro = 'Boy';
-    avatar_url = `${IMG_URL}/images/boy.png`;
-  } else {
-    intro = 'Girl';
-    avatar_url = `${IMG_URL}/images/girl.png`;
+  
+  const setAvatar = gender => {
+    console.log('in setAvatar >>> gender ', gender);
+    if (gender === 'M') {
+      intro = 'Boy';
+      return (
+        <Avatar
+        large
+        rounded
+        source={require('../images/boy.png')}
+        activeOpacity={0.7}
+        />
+      );
+    } else {
+      intro = 'Girl';
+      return (
+        <Avatar
+        large
+        rounded
+        source={require('../images/girl.png')}
+        activeOpacity={0.7}
+        />
+      )
+    }
   }
+
   return (
     <ScrollView>
       <View style={styles.headerContainer}>
-        <Avatar
-          large
-          rounded
-          source={{uri:avatar_url}}
-          activeOpacity={0.7}
-        />
+        {setAvatar(gender)}
       </View>
       <View style={[styles.headerContainer, styles.highlight]}>
         <Text style={{color: '#fff', fontWeight: 'bold'}}>{`${intro} - Age: ${age}`}</Text>

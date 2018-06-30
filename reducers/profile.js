@@ -18,6 +18,13 @@ export default (state=initialState, action) => {
     case 'UNASSIGNED_REJECTED':
       return action.payload;
 
+    case 'RESET_PENDING':
+      return initialState;
+    case 'RESET_FULFILLED':
+      return initialState;
+    case 'RESET_REJECTED':
+      return initialState;
+
     default:
       return state;
 

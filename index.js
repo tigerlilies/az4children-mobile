@@ -13,4 +13,4 @@ const Main = () => (
   </Provider>
 );
 
-AppRegistry.registerComponent('mobile', () => Main);
+AppRegistry.registerComponent('mentorme', () => Main);
