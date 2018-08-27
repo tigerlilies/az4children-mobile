@@ -18,7 +18,6 @@ const Child = (props) => {
   let intro = '';
   
   const setAvatar = gender => {
-    console.log('in setAvatar >>> gender ', gender);
     if (gender === 'M') {
       intro = 'Boy';
       return (

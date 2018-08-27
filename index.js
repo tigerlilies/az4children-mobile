@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { AppRegistry } from 'react-native';
+import { AppRegistry, YellowBox } from 'react-native';
 import { Provider } from 'react-redux';
 
 import Store from './store';
 import App from './App';
+
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
 const StoreInstance = Store();
 

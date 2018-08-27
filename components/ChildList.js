@@ -17,7 +17,6 @@ const getTodayDate = () => {
   }
   today = yyyy + '/' + mm + '/' + dd;
 
-  console.log('in getTodayDate >>> today:', today);
   return today;
 }
 
@@ -45,7 +44,6 @@ const ChildList = (props) => {
 
   let children = props.profiles;
   if (gender !== '0') {
-    console.log('filtering by gender');
     children = props.profiles.filter(profile => profile.gender === gender);
   }
 
@@ -58,7 +56,6 @@ const ChildList = (props) => {
     4: 15 - 18 years
   ******************/
   if (age !== undefined) {
-    console.log('filtering by age');
     children = children.filter(child => {
       switch (age) {
         case '1':
@@ -84,7 +81,6 @@ const ChildList = (props) => {
     4: Greater than 120 days
   ******************/
   if (length != undefined) {
-    console.log('filtering by length');
     let today = getTodayDate();
     let date2 = new Date(today);
     children = children.filter(child => {
