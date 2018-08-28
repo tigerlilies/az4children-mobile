@@ -2,12 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, ScrollView, View, Text, Image } from 'react-native';
 import { ListItem, Icon } from 'react-native-elements';
-// import { Tabs } from '../config/router';
 
 const getTodayDate = () => {
   let today = new Date();
   let dd = today.getDate();
-  let mm = today.getMonth() + 1; //January is 0!
+  let mm = today.getMonth() + 1;     // January is 0
   let yyyy = today.getFullYear();
   if (dd < 10) {
     dd = '0' + dd
@@ -33,7 +32,7 @@ const ChildList = (props) => {
 
   const { navigate } = props.navigation;
   let { age, gender, length } = props.navigation.state.params;
-  let headingText = '';
+  let headingText = 'Child Profiles';
   if (gender === 'M') {
     headingText = 'Boy';
   } else if (gender === 'F') {
@@ -42,9 +41,9 @@ const ChildList = (props) => {
     headingText = 'Child Profiles';
   }
 
-  let children = props.profiles;
+  let children = props.profiles.unassigned;
   if (gender !== '0') {
-    children = props.profiles.filter(profile => profile.gender === gender);
+    children = props.profiles.unassigned.filter(profile => profile.gender === gender);
   }
 
   /******************

@@ -1,16 +1,27 @@
 import {
-  UNASSIGNED,
-  RESET
+  UNASSIGNED_SUCCESS,
+  RESET,
+  UNASSIGNED
 } from '../actions/types';
 
-let initialState = [];
+const initialState = {
+  loading: false,
+  unassigned: []
+};
 
 export default (state=initialState, action) => {
 
   switch (action.type) {
 
     case UNASSIGNED:
-      return action.profiles;
+      return { ...state, loading: true };
+
+    case UNASSIGNED_SUCCESS:
+      return { 
+        ...state,
+        ...initialState,
+        unassigned: action.profiles
+      };
 
     case RESET:
       return initialState;

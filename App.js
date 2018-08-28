@@ -4,32 +4,42 @@
  */
 
 import React, { Component } from 'react';
-import { connect, Provider } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { View, ActivityIndicator } from 'react-native';
 
-import Store from './store';
-import { Root, Tabs } from './config/router';
-import * as profileAction from './actions/profile';
+import { Root } from './config/router';
+import { fetchUnassigned, reset } from './actions/profile';
 
 class App extends Component {
   componentDidMount() {
-    this.props.profileAction.fetchUnassigned();
+    this.props.fetchUnassigned();
   }
 
   componentWillUnmount() {
-    this.props.profileAction.reset();
+    this.props.reset();
   }
 
   render() {
-    return <Root />;
+    const { loading } = this.props.profiles;
+    return loading ? 
+      <View style={styles.spinnerStyle}><ActivityIndicator size='large' /></View> : 
+      <Root />;
   }
 
 }
 
-function mapDispatchToProps(dispatch) {
+function mapStateToProps(state, props) {
   return {
-    profileAction: bindActionCreators(profileAction, dispatch)
+    profiles: state.profiles
   }
 }
 
-export default connect(null, mapDispatchToProps)(App);
+const styles = {
+  spinnerStyle: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+};
+
+export default connect(mapStateToProps, { fetchUnassigned, reset })(App);
