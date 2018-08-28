@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, ScrollView, Text, Image } from 'react-native';
+import { StyleSheet, View, ScrollView, Text, Image } from 'react-native';
 import { Card, Button } from 'react-native-elements';
 
 const Home = (props) => {
   const { navigate } = props.navigation;
   return (
-    <ScrollView>
-      <Card containerStyle={{ borderRadius: 5 }}>
+    <ScrollView contentContainerStyle={styles.containerStyle}>
+      <Card containerStyle={styles.cardStyle}>
         <Image
           source={require('../images/logo.png')}
           style={styles.logo}
@@ -20,7 +20,7 @@ const Home = (props) => {
         <Button
           icon={{name: 'female-symbol', type: 'foundation' }}
           backgroundColor='#E91AD5'
-          buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 50}}
+          buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 30}}
           onPress={() => navigate('ChildList', { gender: 'F' })}
           title='GIRL' />
         <Button
@@ -38,9 +38,17 @@ export default Home;
 
 const styles = StyleSheet.create({
   logo: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
     marginTop: 70,
-    marginLeft: 50,
     marginBottom: 50,
     width: 200
+  },
+  cardStyle: {
+    borderRadius: 5
+  },
+  containerStyle: {
+    flexGrow: 1, 
+    justifyContent: 'center'
   }
 });

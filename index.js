@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import Store from './store';
 import App from './App';
 
-YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader', 'Class RCTCxxModule']);
 
 const StoreInstance = Store();
 

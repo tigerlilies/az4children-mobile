@@ -14,7 +14,11 @@ import About from '../components/About';
 
 export const HomeStack = createStackNavigator({
   Home: {
-    screen: Home
+    screen: Home,
+    headerMode: 'none',
+    navigationOptions: ({navigation}) => ({
+      header: null
+    })
   },
   ChildList: {
     screen: ChildList,
@@ -55,6 +59,7 @@ export const HomeStack = createStackNavigator({
 export const Tabs = createBottomTabNavigator({
   Home: {
     screen: HomeStack,
+    backBehavior: 'none',
     navigationOptions: {
       tabBarLabel: 'Home',
       tabBarIcon: ({ tintColor }) => <Icon name="home" size={35} color={tintColor} />,
