@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Linking } from 'react-native';
+import { StyleSheet, ScrollView, Text, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as utilAction from '../actions/utils';
@@ -15,33 +15,62 @@ class Confirm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      errorMessage: '',
+      errorLName: '',
+      errorFName: '',
+      errorPhone: '',
+      errorEmail: '',
+      mentorLName: '',
+      mentorFName: '',
+      mentorPhone: '',
       mentorEmail: ''
     };
   }
 
   processSubmit(props) {
-    // console.log('in processSubmit >>> mentorEmail:', props);
-    // console.log('in processSubmit >>> mentorEmail:', this.state.mentorEmail);
-    if (this.state.mentorEmail === '' || this.state.mentorEmail === undefined) {
-      this.setState({errorMessage: 'Email address is required!'});
-    } else {
-      const { navigate } = props.navigation;
-      let { id } = props.navigation.state.params;
-      utilAction.sendEmail({
-      	to: EMAIL_SENDTO,
-        subject: EMAIL_SUBJECT,
-        text: EMAIL_INTRO1,
-        html: `<p>${EMAIL_INTRO1}: ${this.state.mentorEmail}</p>
-          <p>${EMAIL_INTRO2}:</p>
-          <p>ID: ${id}</p>`
-      });
-      navigate('Home');
+    let isValidationFailed = false;
+    const { mentorEmail, mentorFName, mentorLName, mentorPhone } = this.state;
+
+    this.setState({ errorLName: '' });
+    this.setState({ errorFName: '' });
+    this.setState({ errorPhone: '' });
+    this.setState({ errorEmail: '' });
+
+    if (mentorEmail === '' || mentorEmail === undefined) {
+      this.setState({ errorEmail: `Email address is required!` });
+      isValidationFailed = true;
     }
+
+    if (mentorFName === '' || mentorFName === undefined) {
+      this.setState({ errorFName: `First name is required!` });
+      isValidationFailed = true;
+    }
+
+    if (mentorLName === '' || mentorLName === undefined) {
+      this.setState({ errorLName: `Last name is required!` });
+      isValidationFailed = true;
+    }
+
+    if (mentorPhone === '' || mentorPhone === undefined) {
+      this.setState({ errorPhone: `Phone number is required!` });
+      isValidationFailed = true;
+    }
+
+    if (isValidationFailed) return;
+
+    const { navigate } = props.navigation;
+    let { id } = props.navigation.state.params;
+    // utilAction.sendEmail({
+    //   to: EMAIL_SENDTO,
+    //   subject: EMAIL_SUBJECT,
+    //   text: EMAIL_INTRO1,
+    //   html: `<p>${EMAIL_INTRO1}: ${mentorEmail}</p>
+    //     <p>${EMAIL_INTRO2}:</p>
+    //     <p>ID: ${id}</p>`
+    // });
+    navigate('Home');
   }
 
   render() {
-    // console.log('in Confirm >>> props', this.props);
     let {
       id,
       age,
@@ -53,26 +82,53 @@ class Confirm extends Component {
       characteristic1,
       characteristic2,
       characteristic3 } = this.props.navigation.state.params;
-    let g = gender === 'M' ? 'Boy' : 'Girl';
+    let g = gender === 'M' ? 'boy' : 'girl';
 
     return (
-      <View style={styles.container}>
-        <FormLabel>Email address:</FormLabel>
+      <ScrollView contentContainerStyle={styles.container}>
+        <FormLabel>Last Name:</FormLabel>
         <FormInput
-          placeholder="Please enter your email address"
+          placeholder = "Enter your last name"
           onChangeText={val => {
-            console.log('val', val);
-            this.setState({mentorEmail: val});
-            console.log('mentorEmail', this.state.mentorEmail);
+            this.setState({mentorLName: val});
           }}
           autoCapitalize="none"
         />
-        <FormValidationMessage>{this.state.errorMessage}</FormValidationMessage>
-        <Text style={{paddingTop: 20}}>Thank you for your interest to mentor a {age} years old {g} to mentor.</Text>
+        <FormValidationMessage>{this.state.errorLName}</FormValidationMessage>
+        <FormLabel>First Name:</FormLabel>
+        <FormInput
+          placeholder="Enter your first name"
+          onChangeText={val => {
+            this.setState({mentorFName: val});
+          }}
+          autoCapitalize="none"
+        />
+        <FormValidationMessage>{this.state.errorFName}</FormValidationMessage>
+        <FormLabel>Phone Number:</FormLabel>
+        <FormInput
+          placeholder = "Enter your phone number"
+          onChangeText={val => {
+            this.setState({mentorPhone: val});
+          }}
+          autoCapitalize="none"
+        />
+        <FormValidationMessage>{this.state.errorPhone}</FormValidationMessage>
+        <FormLabel>Email address:</FormLabel>
+        <FormInput
+          placeholder = "Enter your email address"
+          onChangeText={val => {
+            this.setState({mentorEmail: val});
+          }}
+          autoCapitalize="none"
+        />
+        <FormValidationMessage>{this.state.errorEmail}</FormValidationMessage>
+        <Text style={{paddingTop: 20}}>
+          Thank you for your interest to mentor a {age} years old {g}. One of our coordinators will contact you.
+        </Text>
         <Text style={styles.summaryStyle}>Summary:</Text>
         <Text>{summary}</Text>
         <Text style={styles.spacer}>
-          If you have not filled out an application, please click on the link below:
+          If you have not filled out an application, please check out link below after submitting this form:
         </Text>
         <Text style={{color: 'blue'}}
           onPress={() => Linking.openURL('http://arizonansforchildren.org/page/volunteer-application')}>
@@ -81,11 +137,11 @@ class Confirm extends Component {
         <Button
           icon={{name: 'email'}}
           backgroundColor='#523F78'
-          buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginTop: 50, marginBottom: 100}}
+          buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginTop: 50, marginBottom: 200}}
           title='SUBMIT'
           onPress={() => this.processSubmit(this.props)}
         />
-      </View>
+      </ScrollView>
     );
 
   }

@@ -26,7 +26,7 @@ export const fetchUnassigned = () => {
       dispatch(fetchUnassignedSuccess(response.data))
     })
     .catch(error => {
-      throw(error);
+      console.log('fetchUnassigned >>> error ', error);
     })
   };
 };
