@@ -1,7 +1,9 @@
 import {
+  UNASSIGNED,
   UNASSIGNED_SUCCESS,
+  INTEREST,
+  INTEREST_SUCCESS,
   RESET,
-  UNASSIGNED
 } from '../actions/types';
 
 const initialState = {
@@ -22,6 +24,14 @@ export default (state=initialState, action) => {
         ...initialState,
         unassigned: action.profiles
       };
+
+    case INTEREST:
+      console.log('in reducer INTEREST >>> state ', state);
+      return { ...state, loading: true };
+
+    case INTEREST_SUCCESS:
+      console.log('in reducer INTEREST_SUCCESS >>> state ', state);
+      return { ...state, loading: false };
 
     case RESET:
       return initialState;

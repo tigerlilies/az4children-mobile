@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import { StyleSheet, ScrollView, Text, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import axios from 'axios';
+// import * as profileAction from '../actions/profile';
 import * as utilAction from '../actions/utils';
 import config from '../config/config';
 import { Button, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
 
-const { EMAIL_SENDTO,
+const API_URL = config.API_URL;
+
+const {
+  EMAIL_SENDTO,
   EMAIL_SUBJECT,
   EMAIL_INTRO1,
   EMAIL_INTRO2 } = config;
@@ -24,9 +29,40 @@ class Confirm extends Component {
       mentorPhone: '',
       mentorEmail: ''
     };
+
+    this.sendConfirmation = this.sendConfirmation.bind(this);
+    this.createInterestRecord = this.createInterestRecord.bind(this);
+    this.processSubmit = this.processSubmit.bind(this);
   }
 
-  processSubmit(props) {
+  sendConfirmation = email => {
+    console.log('in sendConfirmation >>> email ', email);
+    console.log('in sendConfirmation >>> url ', `${API_URL}/api/utils/send`);
+    axios.post(`${API_URL}/api/utils/send`, email)
+      .then(response => console.log('successfully sent email >>> response ', response))
+      .catch(error => console.log('sendConfirmation >>> error ', error))
+  };
+
+  createInterestRecord = interest => {
+    axios.post(`${API_URL}/api/public/interest`, interest)
+    .then(response => {
+      console.log('successfully created interest record >>> response ', response);
+      console.log('successfully created interest record >>> interest ', interest);
+      console.log('successfully created interest record >>> EMAIL_SENDTO ', EMAIL_SENDTO);
+      this.sendConfirmation({
+        to: EMAIL_SENDTO,
+        cc: interest.mentor_email,
+        subject: EMAIL_SUBJECT,
+        text: EMAIL_INTRO1,
+        html: `<p>${EMAIL_INTRO1}: ${interest.mentor_email}</p>
+              <p>${EMAIL_INTRO2}:</p>
+              <p>ID: ${interest.child_id}</p>`
+      });
+    })
+    .catch(error => console.log('createInterestRecord >>> error ', error))
+  };
+
+  processSubmit = props => {
     let isValidationFailed = false;
     const { mentorEmail, mentorFName, mentorLName, mentorPhone } = this.state;
 
@@ -58,30 +94,25 @@ class Confirm extends Component {
     if (isValidationFailed) return;
 
     const { navigate } = props.navigation;
-    let { id } = props.navigation.state.params;
-    // utilAction.sendEmail({
-    //   to: EMAIL_SENDTO,
-    //   subject: EMAIL_SUBJECT,
-    //   text: EMAIL_INTRO1,
-    //   html: `<p>${EMAIL_INTRO1}: ${mentorEmail}</p>
-    //     <p>${EMAIL_INTRO2}:</p>
-    //     <p>ID: ${id}</p>`
-    // });
+    let { id, zone } = props.navigation.state.params;
+
+    const interest = {
+      child_id: id,
+      zone,
+      mentor_lname: mentorLName,
+      mentor_fname: mentorFName,
+      mentor_phone: mentorPhone,
+      mentor_email: mentorEmail
+    };
+
+    this.createInterestRecord(interest);
+    // profileAction.createInterest(interest);
+
     navigate('Home');
   }
 
   render() {
-    let {
-      id,
-      age,
-      gender,
-      summary,
-      need1,
-      need2,
-      need3,
-      characteristic1,
-      characteristic2,
-      characteristic3 } = this.props.navigation.state.params;
+    let { age, gender, summary } = this.props.navigation.state.params;
     let g = gender === 'M' ? 'boy' : 'girl';
 
     return (
@@ -150,6 +181,7 @@ class Confirm extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
+    // profileAction: bindActionCreators(profileAction, dispatch),
     utilAction: bindActionCreators(utilAction, dispatch)
   }
 }
