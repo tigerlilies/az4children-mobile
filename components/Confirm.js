@@ -27,7 +27,8 @@ class Confirm extends Component {
       mentorLName: '',
       mentorFName: '',
       mentorPhone: '',
-      mentorEmail: ''
+      mentorEmail: '',
+      mentorComments: ''
     };
 
     this.sendConfirmation = this.sendConfirmation.bind(this);
@@ -64,7 +65,7 @@ class Confirm extends Component {
 
   processSubmit = props => {
     let isValidationFailed = false;
-    const { mentorEmail, mentorFName, mentorLName, mentorPhone } = this.state;
+    const { mentorEmail, mentorFName, mentorLName, mentorPhone, mentorComments } = this.state;
 
     this.setState({ errorLName: '' });
     this.setState({ errorFName: '' });
@@ -102,7 +103,8 @@ class Confirm extends Component {
       mentor_lname: mentorLName,
       mentor_fname: mentorFName,
       mentor_phone: mentorPhone,
-      mentor_email: mentorEmail
+      mentor_email: mentorEmail,
+      mentor_comments: mentorComments
     };
 
     this.createInterestRecord(interest);
@@ -153,6 +155,14 @@ class Confirm extends Component {
           autoCapitalize="none"
         />
         <FormValidationMessage>{this.state.errorEmail}</FormValidationMessage>
+        <FormLabel>Comments:</FormLabel>
+        <FormInput
+          placeholder="Enter optional comments"
+          onChangeText={val => {
+            this.setState({mentorComments: val});
+          }}
+          multiline
+        />
         <Text style={{paddingTop: 20}}>
           Thank you for your interest to mentor a {age} years old {g}. One of our coordinators will contact you.
         </Text>
