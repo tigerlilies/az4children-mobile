@@ -52,7 +52,7 @@ export const HomeStack = createStackNavigator({
   },
   Confirm: {
     screen: Confirm,
-    navigationOptions: ({navigation}) => ({title: 'Confirm'})
+    navigationOptions: ({navigation}) => ({title: 'Interest Form'})
   }
 });
 
